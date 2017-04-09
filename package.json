@@ -1,0 +1,22 @@
+{
+  "name": "ethereumjs-ledger",
+  "version": "1.0.0",
+  "description": "A wrapper library around the official Ledger JavaScript library that attempts to simplify usage and handle various failure modes/problems.",
+  "main": "output/source/index.js",
+  "repository": "https://github.com/ethereumjs/ethereumjs-ledger",
+  "author": "Micah Zoltu <micah@zoltu.net>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/chai-as-promised": "^0.0.30",
+    "@types/q": "1.0.0",
+    "chai-as-promised": "^6.0.0",
+    "ledgerco": "1.1.2",
+    "semaphore-async-await": "1.5.1"
+  },
+  "devDependencies": {
+    "@types/chai": "3.4.35",
+    "@types/mocha": "2.2.40",
+    "chai": "3.5.0",
+    "mocha": "3.2.0"
+  }
+}
