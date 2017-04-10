@@ -218,6 +218,20 @@ describe("LedgerEthereum", async () => {
 		}
 	});
 
+	it("throws when connect ledger request throws", async () => {
+		mockLedgerConnection.state = MockLedgerState.Unplugged;
+
+		connectLedgerRequest = async () => { await delay(0); throw new Error("apple"); }
+
+		try {
+			const address = await ledgerEthereum.getAddressByBip44Index();
+			expect(false).to.be.true;
+		} catch (error) {
+			expect(error).to.be.instanceof(Error);
+			expect(error.message).to.equal("apple");
+		}
+	});
+
 	it("returns signed message", async () => {
 		mockLedgerConnection.state = MockLedgerState.EthereumApp;
 
