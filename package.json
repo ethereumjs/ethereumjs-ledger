@@ -1,6 +1,6 @@
 {
   "name": "ethereumjs-ledger",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A wrapper library around the official Ledger JavaScript library that attempts to simplify usage and handle various failure modes/problems.",
   "main": "output/source/index.js",
   "types": "output/source/index.d.ts",
