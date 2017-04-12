@@ -21,6 +21,7 @@ enum MockLedgerState {
 	HomeScreen,
 	NonEthereumApp,
 	EthereumAppWrongMode,
+	EthereumAppContractsDisabled,
 	EthereumApp,
 }
 
@@ -119,19 +120,23 @@ describe("LedgerEthereum", async () => {
 	let connectLedgerRequest: () => Promise<void>;
 	let openEthereumAppRequest: () => Promise<void>;
 	let switchLedgerModeRequest: () => Promise<void>;
+	let enableContractSupportRequest: () => Promise<void>;
 	let connectLedgerRequestCallbacks: boolean[];
 	let openEthereumAppRequestCallbacks: boolean[];
 	let switchLedgerModeRequestCallbacks: boolean[];
+	let enableContractSupportRequestCallbacks: boolean[];
 	beforeEach(() => {
 		const ledgerConnectionFactory = async () => { await delay(0); return mockLedgerConnection; };
 		mockLedgerConnection = new MockLedgerConnection();
-		ledgerEthereum = new LedgerEthereum(Network.Main, ledgerConnectionFactory, () => connectLedgerRequest(), () => openEthereumAppRequest(), () => switchLedgerModeRequest());
+		ledgerEthereum = new LedgerEthereum(Network.Main, ledgerConnectionFactory, () => connectLedgerRequest(), () => openEthereumAppRequest(), () => switchLedgerModeRequest(), () => enableContractSupportRequest());
 		connectLedgerRequestCallbacks = [];
 		openEthereumAppRequestCallbacks = [];
 		switchLedgerModeRequestCallbacks = [];
+		enableContractSupportRequestCallbacks = [];
 		connectLedgerRequest = async () => { delay(0); connectLedgerRequestCallbacks.push(true); mockLedgerConnection.state = MockLedgerState.EthereumApp; }
 		openEthereumAppRequest = async () => { delay(0); openEthereumAppRequestCallbacks.push(true); mockLedgerConnection.state = MockLedgerState.EthereumApp; }
 		switchLedgerModeRequest = async () => { delay(0); switchLedgerModeRequestCallbacks.push(true); mockLedgerConnection.state = MockLedgerState.EthereumApp; }
+		enableContractSupportRequest = async () => { delay(0); switchLedgerModeRequestCallbacks.push(true); mockLedgerConnection.state = MockLedgerState.EthereumApp; }
 	});
 
 	it("calls callback when device not plugged in", async () => {
@@ -196,7 +201,8 @@ describe("LedgerEthereum", async () => {
 		mockLedgerConnection.state = MockLedgerState.Unplugged;
 		connectLedgerRequest = async () => { delay(0); connectLedgerRequestCallbacks.push(true); mockLedgerConnection.state = MockLedgerState.HomeScreen; }
 		openEthereumAppRequest = async () => { delay(0); openEthereumAppRequestCallbacks.push(true); mockLedgerConnection.state = MockLedgerState.EthereumAppWrongMode; }
-		switchLedgerModeRequest = async () => { delay(0); switchLedgerModeRequestCallbacks.push(true); mockLedgerConnection.state = MockLedgerState.EthereumApp; }
+		switchLedgerModeRequest = async () => { delay(0); switchLedgerModeRequestCallbacks.push(true); mockLedgerConnection.state = MockLedgerState.EthereumAppContractsDisabled; }
+		enableContractSupportRequest = async () => { delay(0); switchLedgerModeRequestCallbacks.push(true); mockLedgerConnection.state = MockLedgerState.EthereumApp; }
 
 		const address = await ledgerEthereum.getAddressByBip44Index();
 
