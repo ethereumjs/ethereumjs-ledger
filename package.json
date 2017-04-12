@@ -11,7 +11,7 @@
     "build": "tsc",
     "pretest": "npm run build",
     "test": "mocha output/tests",
-    "prepublishOnly": "test"
+    "prepublishOnly": "npm run test"
   },
   "dependencies": {
     "@types/chai-as-promised": "^0.0.30",

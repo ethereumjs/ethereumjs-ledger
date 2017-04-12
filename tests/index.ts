@@ -248,4 +248,8 @@ describe("LedgerEthereum", async () => {
 		expect(signature.v).to.equal("1c");
 		expect(signature.toString()).to.equal("0x7a808ab6985a90c9e9c07b3f7993e2dbcd0c3030ec48007f1f6a4787dc6eb50469c711ac971e76e58b11328db4ec072d6cc71f0c0dabd1669f4ac105e08b90c11c");
 	});
+
+	it("fails", async () => {
+		expect(false).to.be.true;
+	});
 });
