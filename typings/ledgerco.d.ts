@@ -1,4 +1,3 @@
-
 declare module "ledgerco" {
 	import * as Q from "q";
 

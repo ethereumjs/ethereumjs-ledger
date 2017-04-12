@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A wrapper library around the official Ledger JavaScript library that attempts to simplify usage and handle various failure modes/problems.",
   "main": "output/source/index.js",
+  "types": "output/source/index.d.ts",
   "repository": "https://github.com/ethereumjs/ethereumjs-ledger",
   "author": "Micah Zoltu <micah@zoltu.net>",
   "license": "MIT",

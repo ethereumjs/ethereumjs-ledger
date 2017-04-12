@@ -11,6 +11,7 @@ export class LedgerEthereum {
 	private connectLedgerRequest: () => Promise<void>;
 	private openEthereumAppRequest: () => Promise<void>;
 	private switchLedgerModeRequest: () => Promise<void>;
+	private enableContractSupportRequest: () => Promise<void>;
 	private lockingLedgerConnection: LockingLedgerConnection;
 
 	constructor(
@@ -19,12 +20,14 @@ export class LedgerEthereum {
 		connectLedgerRequest: () => Promise<void>,
 		openEthereumAppRequest: () => Promise<void>,
 		switchLedgerModeRequest: () => Promise<void>,
+		enableContractSupportRequest: () => Promise<void>,
 	) {
 		this.network = network;
 		this.lockingLedgerConnection = new LockingLedgerConnection(ledgerConnectionFactory);
 		this.connectLedgerRequest = connectLedgerRequest;
 		this.openEthereumAppRequest = openEthereumAppRequest;
 		this.switchLedgerModeRequest = switchLedgerModeRequest;
+		this.enableContractSupportRequest = enableContractSupportRequest;
 	}
 
 	// TODO: deal with timeouts
@@ -70,7 +73,10 @@ export class LedgerEthereum {
 			} else if (error === "Invalid channel;") {
 				await this.switchLedgerModeRequest();
 				return await this.callLedgerWithErrorHandling(api, func);
-			} else if (error instanceof Error && error.message === "Invalid hex string") {
+			} else if (error === "Invalid status 6a80") {
+				await this.enableContractSupportRequest();
+				return await this.callLedgerWithErrorHandling(api, func);
+			}else if (error instanceof Error && error.message === "Invalid hex string") {
 				const betterError = new ErrorWithCode("Invalid input", ErrorCode.InvalidInput);
 				betterError.stack = error.stack;
 				throw betterError;
