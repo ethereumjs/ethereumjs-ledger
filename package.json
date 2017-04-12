@@ -7,6 +7,12 @@
   "repository": "https://github.com/ethereumjs/ethereumjs-ledger",
   "author": "Micah Zoltu <micah@zoltu.net>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "pretest": "npm run build",
+    "test": "mocha output/tests",
+    "prepublishOnly": "test"
+  },
   "dependencies": {
     "@types/chai-as-promised": "^0.0.30",
     "@types/q": "1.0.0",
