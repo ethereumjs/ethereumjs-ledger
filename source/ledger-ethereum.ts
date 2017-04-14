@@ -86,5 +86,5 @@ export class LedgerEthereum {
 		}
 	}
 
-	private bip44IndexToBip32Path = (index: number) => `m/44'/${this.network}/0'/0/${index}`;
+	private bip44IndexToBip32Path = (index: number) => `m/44'/${this.network}'/0'/0/${index}`;
 }
