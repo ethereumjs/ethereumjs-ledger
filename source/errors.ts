@@ -3,6 +3,7 @@ export enum ErrorCode {
 	EthereumAppNotOpen,
 	WrongMode,
 	InvalidInput,
+	BadRequest,
 	Unknown,
 }
 

@@ -76,7 +76,16 @@ export class LedgerEthereum {
 			} else if (error === "Invalid status 6a80") {
 				await this.enableContractSupportRequest();
 				return await this.callLedgerWithErrorHandling(api, func);
-			}else if (error instanceof Error && error.message === "Invalid hex string") {
+			} else if (error === "Invalid status 6804") {
+				throw new ErrorWithCode("Security Exception.  This likely means you provided an invalid BIP32 path.  Do you have hardening in the right places?", ErrorCode.BadRequest);
+			} else if (error && error.errorCode === 2) {
+				const betterError = new ErrorWithCode("Bad Request.  This likely means you are trying to use u2f from a webpage served by HTTP (instead of HTTPS).", ErrorCode.BadRequest);
+				betterError.stack = error.stack;
+				throw betterError;
+			} else if (error && error.errorCode === 5) {
+				await this.connectLedgerRequest();
+				return await this.callLedgerWithErrorHandling(api, func);
+			} else if (error instanceof Error && error.message === "Invalid hex string") {
 				const betterError = new ErrorWithCode("Invalid input", ErrorCode.InvalidInput);
 				betterError.stack = error.stack;
 				throw betterError;
