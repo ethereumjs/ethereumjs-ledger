@@ -95,5 +95,6 @@ export class LedgerEthereum {
 		}
 	}
 
-	private bip44IndexToBip32Path = (index: number) => `m/44'/${this.network}'/0'/0/${index}`;
+	// FIMXE: change to `m/44'/${this.network}'/0'/0/${index}` after https://github.com/LedgerHQ/blue-app-eth/issues/2 is fixed.
+	private bip44IndexToBip32Path = (index: number) => `m/44'/60'/0'/0/${index}`;
 }
