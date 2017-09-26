@@ -25,3 +25,7 @@ async function doStuff() {
 	assert.equal(firstSignedMessage, secondSignedMessage);
 }
 ```
+
+# Development
+
+NOTE: The build does not work in Travis nor in Docker at the moment because `node-hid` (transitively required via `ledgerco`) attempts to initialize when `require('node-hid')` is called and this fails in the node Docker image and Travis CI because there is no access to USB devices in those environments.  This code's tests fully mock out everything that touches USB but because the `require('ledgerco')` fails none of the tests even attempt to run.  Further investigation may result in figuring out a way to run the tests in Docker/Travis, but for now expect them to fail.

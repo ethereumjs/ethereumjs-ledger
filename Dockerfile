@@ -1,5 +1,8 @@
 FROM node:6
 
+RUN apt-get update \
+	&& apt-get install --yes libusb-1.0-0-dev
+
 COPY package.json /app/package.json
 WORKDIR /app
 RUN yarn install
