@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2017",
     "module": "commonjs",
     "sourceMap": true,
     "outDir": "output",
@@ -16,8 +16,10 @@
   "include": [
     "source/**/*ts",
     "tests/**/*.ts",
+    "scripts/**/*.ts",
     "typings/**/*.d.ts",
     "source/**/*js",
-    "tests/**/*.js"
+    "tests/**/*.js",
+    "scripts/**/*.js"
   ]
 }
