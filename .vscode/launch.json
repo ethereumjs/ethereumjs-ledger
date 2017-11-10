@@ -4,6 +4,12 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Node w/ Hardware Attached Test",
+      "program": "${workspaceFolder}/output/scripts/node.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Mocha Tests",
       "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
       "args": [
