@@ -216,7 +216,7 @@ describe("LedgerEthereum", async () => {
 		mockLedgerConnection.state = MockLedgerState.EthereumApp;
 
 		try {
-			const signature = await ledgerEthereum.signTransactionByBip44Index("letters");
+			await ledgerEthereum.signTransactionByBip44Index("letters");
 			expect(false).to.be.true;
 		} catch (error) {
 			expect(error).to.be.instanceof(ErrorWithCode);

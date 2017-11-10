@@ -42,7 +42,7 @@ export class LedgerEthereum {
 			return await this.callLedgerWithErrorHandling(ledgerEthereumApi, async api => {
 				const publicKeyAndAddress = await ledgerEthereumApi.getAddress_async(path);
 				return publicKeyAndAddress.address;
-			})
+			});
 		});
 	}
 
@@ -52,6 +52,7 @@ export class LedgerEthereum {
 	}
 
 	public signTransactionByBip32Path = async (hexEncodedTransaction: string, path: string = this.bip44IndexToBip32Path(0)): Promise<Signature> => {
+		if (!/^[0-9a-fA-F]*$/.test(hexEncodedTransaction)) throw new ErrorWithCode(`Transaction must be a byte array hex encoded into a string.  Received ${hexEncodedTransaction}`, ErrorCode.InvalidInput);
 		return await this.lockingLedgerConnection.safelyCallEthereumApi(async ledgerEthereumApi => {
 			return await this.callLedgerWithErrorHandling(ledgerEthereumApi, async api => {
 				const signature = await ledgerEthereumApi.signTransaction_async(path, hexEncodedTransaction);
