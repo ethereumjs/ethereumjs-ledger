@@ -29,13 +29,10 @@ async function doStuff() {
 
 # Development
 
-### NOTE 0
-The build does not work in Travis nor in Docker at the moment because `node-hid` (transitively required via `ledgerco`) attempts to initialize when `require('node-hid')` is called and this fails in the node Docker image and Travis CI because there is no access to USB devices in those environments.  This code's tests fully mock out everything that touches USB but because the `require('ledgerco')` fails none of the tests even attempt to run.  Further investigation may result in figuring out a way to run the tests in Docker/Travis, but for now expect them to fail.  This note should be re-evaluated when node-hid 6.0.0 is released and/or [this issue](https://github.com/node-hid/node-hid/issues/226#issuecomment-338734286) is closed.
-
 ### Note 1
-`npm-shrinkwrap.json` force updates `node-hid`, a transitive dependency of `ledgerco` to `0.5.7`.  This is necessary to get things working on Windows without requiring python.
+`package-lock.json` force updates `node-hid`, a transitive dependency of `ledgerco` to `0.6.0`.  This is necessary to get things working on Windows without requiring python as well as get tests working in Docker until `ledgerco` upgrades its dependency on `node-hid` to `0.6.0`.
 
 ### Testing with a physical ledger
 You can test in node by building the TypeScript files and then running `node output/scripts/node.js`.
 
-You can test in browser by building the TypeScript files and then running `npx budo output/scripts/browser.js --ssl` (note: you need openssl binaries on your path or in the root of your project).
+You can test in browser (chrome only, look at developer console) by building the TypeScript files and then running `npx budo output/scripts/browser.js --ssl` (note: you need openssl binaries on your path or in the root of your project).
