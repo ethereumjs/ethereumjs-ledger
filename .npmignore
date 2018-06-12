@@ -1,9 +1,10 @@
-node_modules/
 .git/
-output/tests/
-tests/
 .vscode/
-output/.editorconfig
+node_modules/
+output/tests/
+output/scripts/
+scripts/
+tests/
 .editorconfig
 .gitignore
 .travis.yml
