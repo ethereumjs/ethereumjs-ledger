@@ -8,7 +8,7 @@ node_js:
 addons:
   apt:
     packages:
-	  - libudev-dev
+      - libudev-dev
       - libusb-1.0-0-dev
 
 before_script:
