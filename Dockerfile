@@ -12,6 +12,8 @@ COPY tsconfig.json /app/tsconfig.json
 COPY source/ /app/source/
 COPY tests/ /app/tests/
 COPY typings/ /app/typings/
+COPY LICENSE /app/LICENSE
+COPY README.md /app/README.md
 
 RUN npm run build
 
