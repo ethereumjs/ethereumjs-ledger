@@ -1,3 +1,18 @@
+# DEPRECATED
+This library is from a time long past.  Ledger has since released new JavaScript libraries for interfacing with a ledger that have completely different APIs, including improved error messaging.  While they still don't address the problem of multiple simultaneous connections, this can easily be solved inline with a semaphore like:
+```typescript
+try {
+	await this.lock.acquire()
+	return await this.ledger.signTransaction(this.derivationPath, rlpEncodedTransactionAsHexString)
+} finally {
+	this.lock.release()
+}
+```
+
+There are some known vulnerabilities in transitive dependencies of this library and they are unlikely to be addressed since they come from Ledger packages that have been deprecated.  There are no known attack vectors through these vulnerabilities, but you should use this library with caution.
+
+----
+
 A wrapper library around the official Ledger JavaScript library that attempts to simplify usage and handle various failure modes/problems.
 
 # Usage
